@@ -137,7 +137,7 @@ data/store.json 或 Neon mockmirror_user_state（每个用户的简历 / 会话 
 
 - 密码使用 scrypt + 随机盐哈希；登录态是 HttpOnly Cookie，服务端只存 token hash
 - 每个用户的数据写入 `mockmirror_user_state(user_id, data)`，简历、面试记录、题库、设置完全隔离
-- 第一个注册用户会继承服务端 `LLM_API_KEY`；后续用户需要自己在设置里填写
+- 所有用户默认使用服务端 `LLM_API_KEY`；也可以在设置里填写自己的 Key 覆盖
 - 没有 `DATABASE_URL` 时保持本地免登录模式，继续使用 `data/store.json`
 
 ### 持久化
