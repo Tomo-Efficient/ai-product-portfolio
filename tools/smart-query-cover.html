@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><style>
+:root{--ink:#171512;--muted:#625d53;--faint:#928b7f;--line:#e4dfd4;--teal:#0f766e;--paper:#fffdf8;--bg:#f6f4ef}
+*{box-sizing:border-box;margin:0;padding:0}body{width:1440px;height:900px;background:var(--paper);font-family:"PingFang SC",system-ui,sans-serif;color:var(--ink);overflow:hidden}
+.shell{width:100%;height:100%;display:flex;flex-direction:column;background:var(--paper)}
+.top{display:flex;align-items:center;justify-content:space-between;padding:16px 26px;border-bottom:1px solid var(--line);background:#faf8f3;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600}.mark{width:26px;height:26px;border-radius:7px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:13px}
+.meta{display:flex;gap:8px;font-family:ui-monospace,monospace;font-size:10px;color:var(--faint);align-items:center}.pill{border:1px solid var(--line);border-radius:99px;padding:4px 9px;background:#fff;color:var(--teal)}
+.body{display:grid;grid-template-columns:1.12fr .88fr;flex:1;min-height:0}
+.left{padding:26px 28px 20px;border-right:1px solid var(--line);display:flex;flex-direction:column}
+.eyebrow{font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.14em;color:var(--faint);text-transform:uppercase}
+h1{font-size:26px;font-weight:600;letter-spacing:-.02em;margin:8px 0 8px;line-height:1.35}
+.answer{font-size:12.5px;line-height:1.75;color:var(--muted);margin-bottom:14px}
+.sql{background:#1c1a17;border-radius:9px;overflow:hidden;flex:none}
+.sqlhead{display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid #322e28;color:#a9a195;font-family:ui-monospace,monospace;font-size:9px}
+pre{padding:12px 14px;color:#e6dfd2;font-family:ui-monospace,monospace;font-size:10.5px;line-height:1.7;white-space:pre-wrap;overflow:hidden}
+.right{padding:24px 24px 18px;background:#fbf9f4;display:flex;flex-direction:column}
+.label{font-family:ui-monospace,monospace;font-size:9px;color:var(--faint);letter-spacing:.12em}
+table{width:100%;border-collapse:collapse;margin-top:8px;font-size:11px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line)}th{background:#f0ede6;font-weight:500;color:var(--muted)}tr:last-child td{border:0}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:14px}.check{border:1px solid var(--line);border-radius:7px;padding:7px 9px;background:#fff;font-size:9.5px;color:var(--muted)}.check b{display:block;color:var(--ink);font-size:10px;font-weight:500;margin-bottom:1px}
+.evidence{margin-top:12px;border-top:1px solid var(--line);padding-top:9px;font-size:9.5px;color:var(--muted);line-height:1.65}.evidence p{position:relative;padding-left:9px}.evidence p::before{content:"";position:absolute;left:0;top:6px;width:3px;height:3px;border-radius:50%;background:var(--teal)}
+.plan{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}.plan div{display:flex;gap:10px;font-size:10px;padding:6px 0;border-bottom:1px solid #f0ede6;color:var(--muted)}.plan b{font-weight:500;color:var(--ink);width:64px;flex:none}.reason{padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:10px;line-height:1.65;color:var(--muted)}.reason b{display:block;color:var(--ink);font-size:10.5px;margin-bottom:3px;font-weight:500}
+.mini{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.mini div{border:1px solid var(--line);border-radius:7px;padding:8px;background:#fff}.mini span{display:block;font-size:8.5px;color:var(--faint)}.mini b{font-family:ui-monospace,monospace;font-size:13px;font-weight:500}
+.chart{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.chart .label{margin-bottom:6px}.bar-row{display:grid;grid-template-columns:72px 1fr 58px;gap:8px;align-items:center;font-size:9.5px;color:var(--muted);padding:3px 0}.bar{height:6px;background:#e8e3d8;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--teal);border-radius:99px}.bar-row b{font-family:ui-monospace,monospace;font-size:9px;font-weight:400;text-align:right}
+.trace{display:flex;border-top:1px solid var(--line);background:#faf8f3;padding:10px 26px;gap:0;align-items:center;height:58px}
+.step{display:flex;align-items:center;gap:7px;font-size:9.5px;color:var(--muted);white-space:nowrap}.step b{font-family:ui-monospace,monospace;font-size:8px;color:var(--teal);border:1px solid #b9e5dc;background:#ecfdf5;border-radius:99px;padding:1px 5px;font-weight:500}
+.sep{flex:1;height:1px;background:var(--line);margin:0 10px;min-width:8px}
+.foot{display:flex;justify-content:space-between;padding:8px 26px;border-top:1px solid var(--line);font-family:ui-monospace,monospace;font-size:8.5px;color:var(--faint);background:#faf8f3}
+</style></head><body>
+<div class="shell">
+  <div class="top"><div class="brand"><span class="mark">石</span>智能问数 Agent <span style="font-weight:400;color:var(--faint);font-size:11px">/ 查询控制台</span></div><div class="meta"><span class="pill">只读账号</span><span class="pill">AST 校验通过</span><span>1.8s</span></div></div>
+  <div class="body">
+    <div class="left">
+      <div class="eyebrow">QUESTION · 业务人员自然语言</div>
+      <h1>上个月各渠道的保费收入环比</h1>
+      <p class="answer">全渠道保费收入 3.12 亿元，环比 +5.8%。互联网渠道增速最快（+21.6%），银保渠道小幅下滑（-2.1%）。</p>
+      <div class="sql"><div class="sqlhead"><span>SQL · 已通过 Query Checking</span><span>dws_policy_premium_di</span></div><pre>WITH cur AS (
+  SELECT channel_code, SUM(premium) AS premium
+  FROM dws_policy_premium_di
+  WHERE stat_date >= DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month')
+    AND policy_status = '有效'
+  GROUP BY channel_code
+)
+SELECT c.channel_name, ROUND(cur.premium/10000,1) AS premium_wan
+FROM cur JOIN dim_channel c USING (channel_code)
+ORDER BY premium_wan DESC LIMIT 100;</pre></div>
+      <div class="plan"><div><b>意图</b>指标：保费收入 · 维度：渠道 · 时间：上月 · 对比：环比</div><div><b>检索</b>命中 2 张表 / 14 个字段；口径知识 3 条</div><div><b>策略</b>Decomposition + CoT；Query Checking 1 次通过</div></div>
+      <div class="mini"><div><span>候选表</span><b>2</b></div><div><span>扫描字段</span><b>14</b></div><div><span>SQL 修复</span><b>0</b></div><div><span>P95</span><b>1.8s</b></div></div>
+    </div>
+    <div class="right">
+      <div class="label">RESULT · 模拟数据</div>
+      <table><thead><tr><th>渠道</th><th>保费（万元）</th><th>环比</th></tr></thead><tbody>
+        <tr><td>个险代理人</td><td>12,840.0</td><td>+8.4%</td></tr>
+        <tr><td>银保渠道</td><td>9,620.0</td><td>-2.1%</td></tr>
+        <tr><td>互联网</td><td>5,480.0</td><td>+21.6%</td></tr>
+        <tr><td>经纪代理</td><td>3,260.0</td><td>+3.2%</td></tr>
+      </tbody></table>
+      <div class="checks">
+        <div class="check"><b>语义命中</b>有效保单 / 保费收入</div>
+        <div class="check"><b>安全护栏</b>无写操作 · 自动 LIMIT</div>
+        <div class="check"><b>字段脱敏</b>敏感字段已隐藏</div>
+        <div class="check"><b>归因</b>选表 / 条件 / 聚合 / 口径</div>
+      </div>
+      <div class="evidence"><div class="label" style="margin-bottom:4px">RETRIEVED EVIDENCE</div><p>指标平台：保费收入 = SUM(premium)，剔除退保</p><p>同义词：保费收入 / 已赚保费 / premium_income</p><p>表关系：channel_code → dim_channel</p></div>
+      <div class="chart"><div class="label">CHART · 保费收入（万元）</div><div class="bar-row"><span>个险代理人</span><div class="bar"><i style="width:100%"></i></div><b>12,840</b></div><div class="bar-row"><span>银保渠道</span><div class="bar"><i style="width:75%"></i></div><b>9,620</b></div><div class="bar-row"><span>互联网</span><div class="bar"><i style="width:43%"></i></div><b>5,480</b></div><div class="bar-row"><span>经纪代理</span><div class="bar"><i style="width:25%"></i></div><b>3,260</b></div></div>
+      <div class="reason" style="margin-top:12px"><b>为什么这样答</b>选表命中保费明细，时间按自然月，聚合前按 policy_no 去重；未使用预聚合宽表，避免口径混淆。</div>
+    </div>
+  </div>
+  <div class="trace"><div class="step"><b>01</b>解析意图</div><div class="sep"></div><div class="step"><b>02</b>检索 Schema</div><div class="sep"></div><div class="step"><b>03</b>生成 SQL</div><div class="sep"></div><div class="step"><b>04</b>Query Checking</div><div class="sep"></div><div class="step"><b>05</b>执行与脱敏</div></div>
+  <div class="foot"><span>石浩田作品集 · 智能问数 Agent 交互示意</span><span>Mock data · 2026</span></div>
+</div>
+</body></html>

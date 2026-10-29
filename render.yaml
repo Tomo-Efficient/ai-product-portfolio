@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: shihaotian-portfolio
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_VERSION
+        value: 24.12.0
+      - key: SITE_URL
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: COACH_DEMO_URL
+        sync: false

@@ -1,0 +1,20 @@
+{
+  "name": "shihaotian-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "石浩田 · AI 产品经理作品集",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "build:static": "node tools/build-static.js"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "0.10.4",
+    "marked": "15.0.6"
+  }
+}

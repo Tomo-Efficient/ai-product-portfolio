@@ -1,0 +1,82 @@
+{
+  "title": "问数控制台",
+  "note": "以下为脱敏模拟数据，仅用于展示「问题 → 检索 → SQL → 校验 → 结果」的交互，不代表真实业务数据。",
+  "questions": [
+    {
+      "id": "q1",
+      "label": "渠道保费环比",
+      "question": "上个月各渠道的保费收入环比",
+      "answer": "上个月全渠道保费收入 3.12 亿元，环比 +5.8%。互联网渠道增速最快（+21.6%），银保渠道小幅下滑（-2.1%）；个险代理人仍是最大来源。",
+      "sql": "WITH cur AS (\n  SELECT channel_code, SUM(premium) AS premium\n  FROM dws_policy_premium_di\n  WHERE stat_date >= DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month')\n    AND stat_date <  DATE_TRUNC('month', CURRENT_DATE)\n    AND policy_status = '有效'\n  GROUP BY channel_code\n), prev AS (\n  SELECT channel_code, SUM(premium) AS premium\n  FROM dws_policy_premium_di\n  WHERE stat_date >= DATE_TRUNC('month', CURRENT_DATE - INTERVAL '2 month')\n    AND stat_date <  DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month')\n    AND policy_status = '有效'\n  GROUP BY channel_code\n)\nSELECT c.channel_name,\n       ROUND(cur.premium / 10000, 1) AS premium_wan,\n       ROUND((cur.premium / NULLIF(prev.premium, 0) - 1) * 100, 1) AS mom_pct\nFROM cur\nJOIN prev USING (channel_code)\nJOIN dim_channel c USING (channel_code)\nORDER BY premium_wan DESC\nLIMIT 100;",
+      "columns": ["渠道", "保费收入（万元）", "环比"],
+      "rows": [
+        ["个险代理人", "12,840.0", "+8.4%"],
+        ["银保渠道", "9,620.0", "-2.1%"],
+        ["互联网", "5,480.0", "+21.6%"],
+        ["经纪代理", "3,260.0", "+3.2%"]
+      ],
+      "checks": [
+        { "label": "只读账号", "status": "pass", "detail": "使用 analytics_ro" },
+        { "label": "AST 校验", "status": "pass", "detail": "无写操作，无全表扫描" },
+        { "label": "自动 LIMIT", "status": "pass", "detail": "已补 LIMIT 100" },
+        { "label": "口径命中", "status": "pass", "detail": "保费收入 / 有效保单 / 环比" }
+      ],
+      "evidence": [
+        "指标平台：保费收入 = SUM(premium)，剔除退保与失效保单",
+        "同义词：保费收入 / 已赚保费 / premium_income",
+        "口径：环比 = 本月 / 上月 - 1，按自然月统计",
+        "表语义：dws_policy_premium_di 按 stat_date 分区，channel_code 关联 dim_channel"
+      ],
+      "latency": "1.8s",
+      "scanned": "2 张表 · 14 个字段"
+    },
+    {
+      "id": "q2",
+      "label": "互联网退保率",
+      "question": "上季度互联网渠道的退保率是多少？",
+      "answer": "上季度互联网渠道退保率为 4.7%，高于全渠道均值 3.9%。主要集中在投保后 30 天内，建议进一步拆分产品与首期保费区间。",
+      "sql": "SELECT\n  ROUND(SUM(CASE WHEN policy_status = '退保' THEN 1 ELSE 0 END)::numeric\n        / COUNT(*), 4) AS surrender_rate,\n  COUNT(*) AS policy_cnt\nFROM dws_policy_premium_di p\nJOIN dim_channel c USING (channel_code)\nWHERE c.channel_name = '互联网'\n  AND p.stat_date >= DATE_TRUNC('quarter', CURRENT_DATE - INTERVAL '1 quarter')\n  AND p.stat_date <  DATE_TRUNC('quarter', CURRENT_DATE)\nLIMIT 100;",
+      "columns": ["退保率", "保单件数"],
+      "rows": [["4.7%", "18,420"]],
+      "checks": [
+        { "label": "只读账号", "status": "pass", "detail": "使用 analytics_ro" },
+        { "label": "AST 校验", "status": "pass", "detail": "无写操作" },
+        { "label": "自动 LIMIT", "status": "pass", "detail": "已补 LIMIT 100" },
+        { "label": "口径命中", "status": "pass", "detail": "退保率 = 退保件数 / 总件数" }
+      ],
+      "evidence": [
+        "指标平台：退保率 = 退保件数 / 承保件数，按保单口径去重",
+        "字段语义：policy_status 枚举包含 有效 / 失效 / 退保",
+        "时间口径：季度按自然季度，stat_date 为保单生效日"
+      ],
+      "latency": "1.4s",
+      "scanned": "2 张表 · 8 个字段"
+    },
+    {
+      "id": "q3",
+      "label": "件均保费趋势",
+      "question": "近 7 天各险种的件均保费",
+      "answer": "近 7 天件均保费最高的是重疾险（8,420 元），其次为年金险（6,150 元）。医疗险件均 1,980 元，但件数最多，适合作为交叉销售入口。",
+      "sql": "SELECT\n  risk_name,\n  ROUND(SUM(premium)::numeric / COUNT(DISTINCT policy_no), 0) AS avg_premium,\n  COUNT(DISTINCT policy_no) AS policy_cnt\nFROM dws_policy_premium_di p\nJOIN dim_risk r USING (risk_code)\nWHERE p.stat_date >= CURRENT_DATE - INTERVAL '7 day'\n  AND p.policy_status = '有效'\nGROUP BY risk_name\nORDER BY avg_premium DESC\nLIMIT 100;",
+      "columns": ["险种", "件均保费（元）", "件数"],
+      "rows": [
+        ["重疾险", "8,420", "1,260"],
+        ["年金险", "6,150", "840"],
+        ["医疗险", "1,980", "3,420"]
+      ],
+      "checks": [
+        { "label": "只读账号", "status": "pass", "detail": "使用 analytics_ro" },
+        { "label": "AST 校验", "status": "pass", "detail": "无写操作" },
+        { "label": "自动 LIMIT", "status": "pass", "detail": "已补 LIMIT 100" },
+        { "label": "去重校验", "status": "pass", "detail": "按 policy_no 去重" }
+      ],
+      "evidence": [
+        "指标平台：件均保费 = 保费收入 / 保单件数，按 policy_no 去重",
+        "字段语义：risk_code 关联 dim_risk，risk_name 为险种名称",
+        "时间口径：近 7 天按自然日滚动，含当日"
+      ],
+      "latency": "1.2s",
+      "scanned": "2 张表 · 9 个字段"
+    }
+  ]
+}

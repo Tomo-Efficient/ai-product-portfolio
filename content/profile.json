@@ -1,0 +1,69 @@
+{
+  "name": "石浩田",
+  "nameEn": "Shi Haotian",
+  "role": "AI 产品经理",
+  "focus": "数据产品 / 大模型应用",
+  "location": "香港 · 深圳",
+  "status": "2027 届 · 求职中",
+  "email": "s18538218915@163.com",
+  "phone": "18538218915",
+  "github": "https://github.com/Tomo-Efficient",
+  "resume": "https://tomo-efficient.github.io/resume/",
+  "hero": {
+    "line1": "把复杂问题，",
+    "line2": "做成能被使用的产品。",
+    "desc": "统计学出身，做过智能问数 Agent、AI 面试教练与数据产品。习惯从真实场景出发，把模糊的需求拆成流程、指标和可验证的迭代。"
+  },
+  "stats": [
+    { "value": "85%+", "label": "NL2SQL 答案正确率" },
+    { "value": "6h → 30s", "label": "单次分析周期" },
+    { "value": "158", "label": "产品测试用例" },
+    { "value": "3", "label": "段产品实习" }
+  ],
+  "principles": [
+    {
+      "no": "01",
+      "title": "先找卡点，再做功能",
+      "desc": "不问“要不要加一个 AI 功能”，先问业务在哪一步停下来。智能问数不是因为要做 Agent，而是因为业务取数要等 6 小时。"
+    },
+    {
+      "no": "02",
+      "title": "把 AI 放进流程，而不是聊天框",
+      "desc": "状态机、检索、校验、降级、评测——AI 产品的质量取决于流程边界，而不是 Prompt 写得多漂亮。"
+    },
+    {
+      "no": "03",
+      "title": "用指标证明，而不是用形容词",
+      "desc": "正确率、时延、完成率、行动转化；每个结果都尽量有口径、有基线、有反例。"
+    }
+  ],
+  "experience": [
+    {
+      "company": "招商金科",
+      "role": "AI 产品经理",
+      "period": "2026.03 — 2026.06",
+      "summary": "负责智能问数 Agent 的产品规划与评测，覆盖 10+ ETL 脚本、近千字段，答案正确率稳定在 85% 以上。"
+    },
+    {
+      "company": "Moodytiger",
+      "role": "数据产品经理",
+      "period": "2025.10 — 2025.12",
+      "summary": "规划小红书营销分析平台，统一 AARRR 口径，投放 ROI 评估耗时缩短 50%。"
+    },
+    {
+      "company": "东华软件",
+      "role": "数据产品经理",
+      "period": "2024.07 — 2024.09",
+      "summary": "面向会员运营搭建分层与指标看板，会员数据准备耗时下降 40%。"
+    }
+  ],
+  "education": [
+    { "school": "香港城市大学", "degree": "统计学（生物方向）硕士", "period": "2025.09 — 2026.10" },
+    { "school": "河南工业大学", "degree": "数据科学与大数据技术 学士", "period": "2021.09 — 2025.06" }
+  ],
+  "skills": [
+    "SQL", "Python", "R", "Agent / ReAct", "RAG", "Prompt 工程", "指标与 AB 实验",
+    "PRD / 原型", "Figma / Axure", "Claude Code / Cursor"
+  ],
+  "availability": "寻找 AI 产品经理 / 数据产品经理机会，欢迎聊项目或交换想法。"
+}
