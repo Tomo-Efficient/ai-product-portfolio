@@ -50,7 +50,7 @@ function loadProject(slug) {
     docs,
     caseStudy,
     demo,
-    demoUrl: slug === 'mockmirror' ? COACH_DEMO_URL : ''
+    demoUrl: slug === 'mockmirror' ? (COACH_DEMO_URL || meta.demoUrl || '') : (meta.demoUrl || '')
   };
 }
 

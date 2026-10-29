@@ -10,6 +10,7 @@
 | 目标 | 状态 | 说明 |
 | --- | --- | --- |
 | **Render + Neon** | **已上线** | https://shihaotian-portfolio.onrender.com，`/healthz` 返回 `db: neon`；留言、反馈、浏览均写入成功 |
+| **面镜 MockMirror** | **已上线** | https://mockmirror.onrender.com，作品集项目页已接入 Live Demo |
 | GitHub Pages | 已上线 | 静态预览：两个项目、10 篇文档、交互 Demo 均可访问 |
 | Vercel | 配置就绪 | `api/index.js` + `vercel.json` 已写好，未做线上验证 |
 
