@@ -204,6 +204,8 @@ export async function handleRequest(req, res) {
         demoHtml: project.demo ? renderDemo(project.demo) : ''
       });
       await recordView({ projectSlug: project.slug, path: pathname, referrer: req.headers.referer || '' }).catch((e) => console.warn('[view]', e.message));
+      stats.counts[project.slug] = (stats.counts[project.slug] || 0) + 1;
+      stats.total = (stats.total || 0) + 1;
       return html(res, 200, renderWork({ project, profile, caseHtml, stats, next: nextProject(project.slug) }));
     }
 
