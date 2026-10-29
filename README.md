@@ -52,15 +52,26 @@
 cd portfolio
 pnpm install      # 或 npm install
 pnpm start        # http://localhost:3000
+npm run db:check  # 连上 Neon 后检查数据库
+npm run build     # 生成静态预览 dist/
 ```
 
-不配置数据库也能完整浏览；联系表单/反馈会写入本地 JSON。
+`start` / `dev` 会自动加载 `.env.local` 和 `.env`。不配置数据库也能完整浏览；联系表单/反馈会写入本地 JSON。
 
 ### 配置 Neon
 
-1. 在 [Neon](https://neon.tech) 创建项目，复制 **pooled** connection string（带 `sslmode=require`）。
-2. 复制 `.env.example` 为 `.env`，填入 `DATABASE_URL`。
-3. 重启服务。服务启动时会自动建表（`db/schema.sql`），也可以手动在 Neon SQL Editor 执行。
+本仓库已经用 Neon CLI 初始化过（`neon.ts`、`.neon` 上下文、`.env.local`）。如果你换到新环境：
+
+```bash
+neon init -y --services postgres
+neon deploy
+npm run db:check
+```
+
+也可以手动在 [Neon](https://neon.tech) 创建项目，复制 **pooled** connection string（带 `sslmode=require`），写入 `.env.local` 或 `.env`：
+
+1. 复制 `.env.example` 为 `.env.local`，填入 `DATABASE_URL`。
+2. 重启服务。服务启动时会自动建表（`db/schema.sql`），也可以手动在 Neon SQL Editor 执行。
 
 ```bash
 DATABASE_URL=postgresql://user:password@ep-xxx-pooler.region.aws.neon.tech/neondb?sslmode=require

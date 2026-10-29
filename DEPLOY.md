@@ -22,9 +22,11 @@ gh repo create Tomo-Efficient/ai-product-portfolio --public --source=. --push
 2. 复制 **Pooled connection string**，形如：
    `postgresql://user:pass@ep-xxx-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require`
 3. 不需要手动建表：应用启动时执行 `db/schema.sql` 中的 `CREATE TABLE IF NOT EXISTS`。
-4. 验证：
+4. 当前仓库已用 Neon CLI 初始化；`neon deploy` 会把 `DATABASE_URL` 写入 `.env.local`，本地 `npm start` 自动加载。
+5. 验证：
 
 ```bash
+npm run db:check
 curl https://<your-domain>/healthz
 ```
 
