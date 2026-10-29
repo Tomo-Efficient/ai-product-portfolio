@@ -160,7 +160,9 @@ portfolio/
 │       └── smart-query/
 ├── public/                # CSS / JS / 图片 / favicon
 ├── db/schema.sql
-├── docs/                  # 本仓库的部署与说明（如有）
+├── api/index.js           # Vercel serverless 入口
+├── .github/workflows/     # GitHub Pages 静态预览
+├── tools/                 # 静态构建、封面生成
 ├── render.yaml
 ├── vercel.json
 └── Dockerfile
@@ -168,13 +170,18 @@ portfolio/
 
 ## 测试
 
-本地已跑通 10 条端到端检查：首页、项目页、文档搜索、Demo 切换、文档反馈、联系表单、404、移动端菜单与横向溢出、浏览计数。
+- **静态页面**：25 个内部链接与资源全部 200；390 / 768 / 1024 / 1440 四个宽度无横向溢出。
+- **端到端**：10 条检查通过（首页、项目页、浏览计数、文档搜索、Demo 切换、文档反馈、联系表单、404、移动端菜单、移动端溢出）。
+- **数据库**：用 `pg-mem` 验证 `db/schema.sql` 与浏览、留言、反馈三类查询可执行。
+- **线上预览**：GitHub Pages 静态页已通过 Chrome 实测，两个项目与 10 篇文档可访问。
 
-```bash
-node /tmp/portfolio-test.mjs   # 需要先启动服务
-```
+## 部署链接
 
-结果：10/10 通过，无 console error。
+- GitHub Pages（静态预览，已上线）：<https://tomo-efficient.github.io/ai-product-portfolio/>
+- Render Blueprint：<https://render.com/deploy?repo=https://github.com/Tomo-Efficient/ai-product-portfolio>
+- Vercel 导入：<https://vercel.com/new/clone?repository-url=https://github.com/Tomo-Efficient/ai-product-portfolio>
+
+> GitHub Pages 是静态预览：文档、项目页、Demo 都可浏览，但表单与浏览统计不写入数据库。需要在 Render/Vercel 配置 `DATABASE_URL` 才能启用 Neon。
 
 ## 内容边界
 
