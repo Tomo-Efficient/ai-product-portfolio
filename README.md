@@ -10,8 +10,10 @@
 | 目标 | 状态 | 说明 |
 | --- | --- | --- |
 | GitHub Pages | 已上线 | 静态预览：两个项目、10 篇文档、交互 Demo 均可访问 |
-| Render + Neon | 待账号授权 | `render.yaml` 已就绪；需要 Render 账号与 Neon `DATABASE_URL` 才能创建线上服务 |
+| Neon Postgres | 已连接（本地验证） | 三张表已创建；`/healthz` 返回 `db: neon`，留言/反馈/浏览均写入成功 |
+| Render | 待账号授权 | `render.yaml` 已就绪；只差在 Render 填 `DATABASE_URL` 并部署 |
 | Vercel | 配置就绪 | `api/index.js` + `vercel.json` 已写好，未做线上验证 |
+
 > 代码：https://github.com/Tomo-Efficient/ai-product-portfolio
 
 ## 项目
@@ -179,9 +181,9 @@ portfolio/
 │       └── smart-query/
 ├── public/                # CSS / JS / 图片 / favicon
 ├── db/schema.sql
-├── api/index.js           # Vercel serverless 入口
+├── neon.ts                # Neon 分支策略（neon deploy 使用）
 ├── .github/workflows/     # GitHub Pages 静态预览
-├── tools/                 # 静态构建、封面生成
+├── tools/                 # 静态构建、封面生成、db:check
 ├── render.yaml
 ├── vercel.json
 └── Dockerfile
