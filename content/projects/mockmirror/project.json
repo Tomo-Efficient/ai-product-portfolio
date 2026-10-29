@@ -1,6 +1,6 @@
 {
   "slug": "mockmirror",
-  "order": 1,
+  "order": 2,
   "name": "面镜 MockMirror",
   "shortName": "面镜",
   "kind": "AI 面试教练",
@@ -14,25 +14,83 @@
   "problem": "通用题库无法针对简历追问，Chatbot 的反馈又缺少证据与下一步；练习完没有沉淀，下一次仍然从零开始。",
   "outcome": "把“简历 & JD → 题单 → 追问 → 复盘 → 题库”做成一条完整闭环，并用 158 条用例验证。",
   "metrics": [
-    { "value": "80", "unit": "道", "label": "内置面试题" },
-    { "value": "16", "unit": "篇", "label": "教研知识库" },
-    { "value": "3", "unit": "种", "label": "面试官人格" },
-    { "value": "40%", "unit": "", "label": "准备材料耗时下降" }
+    {
+      "value": "80",
+      "unit": "道",
+      "label": "内置面试题"
+    },
+    {
+      "value": "16",
+      "unit": "篇",
+      "label": "教研知识库"
+    },
+    {
+      "value": "3",
+      "unit": "种",
+      "label": "面试官人格"
+    },
+    {
+      "value": "40%",
+      "unit": "",
+      "label": "准备材料耗时下降"
+    }
   ],
-  "tags": ["AI 产品", "Agent 编排", "RAG", "评测", "独立开发"],
+  "tags": [
+    "AI 产品",
+    "Agent 编排",
+    "RAG",
+    "评测",
+    "独立开发"
+  ],
   "cover": "/assets/work/mockmirror-home.jpg",
   "coverAlt": "面镜 MockMirror 工作台",
   "gallery": [
-    { "src": "/assets/work/mockmirror-interview.jpg", "caption": "模拟面试：流式追问、五维评分与 Agent 轨迹" },
-    { "src": "/assets/work/mockmirror-report.jpg", "caption": "复盘报告：雷达、逐题证据、知识库引用与行动清单" }
+    {
+      "src": "/assets/work/mockmirror-interview.jpg",
+      "caption": "模拟面试：流式追问、五维评分与 Agent 轨迹"
+    },
+    {
+      "src": "/assets/work/mockmirror-report.jpg",
+      "caption": "复盘报告：雷达、逐题证据、知识库引用与行动清单"
+    }
   ],
   "repoUrl": "https://github.com/Tomo-Efficient/mockmirror",
   "demoUrl": "https://mockmirror.onrender.com",
   "docs": [
-    { "slug": "readme", "label": "01", "title": "README", "file": "readme.md", "summary": "功能、启动方式、目录结构与关键指标" },
-    { "slug": "prd", "label": "02", "title": "产品需求文档 PRD", "file": "prd.md", "summary": "竞品、用户、指标、9 个模块与 45 条验收标准" },
-    { "slug": "architecture", "label": "03", "title": "架构说明", "file": "architecture.md", "summary": "状态机、RAG、评分体系、上下文与数据模型" },
-    { "slug": "prompts", "label": "04", "title": "Prompt 设计", "file": "prompts.md", "summary": "四类 Prompt、上下文预算、降级与校验策略" },
-    { "slug": "demo", "label": "05", "title": "演示脚本", "file": "demo.md", "summary": "3 分钟与 10 分钟两套讲法，以及现场问答" }
+    {
+      "slug": "readme",
+      "label": "01",
+      "title": "README",
+      "file": "readme.md",
+      "summary": "功能、启动方式、目录结构与关键指标"
+    },
+    {
+      "slug": "prd",
+      "label": "02",
+      "title": "产品需求文档 PRD",
+      "file": "prd.md",
+      "summary": "竞品、用户、指标、9 个模块与 45 条验收标准"
+    },
+    {
+      "slug": "architecture",
+      "label": "03",
+      "title": "架构说明",
+      "file": "architecture.md",
+      "summary": "状态机、RAG、评分体系、上下文与数据模型"
+    },
+    {
+      "slug": "prompts",
+      "label": "04",
+      "title": "Prompt 设计",
+      "file": "prompts.md",
+      "summary": "四类 Prompt、上下文预算、降级与校验策略"
+    },
+    {
+      "slug": "demo",
+      "label": "05",
+      "title": "演示脚本",
+      "file": "demo.md",
+      "summary": "3 分钟与 10 分钟两套讲法，以及现场问答"
+    }
   ]
 }

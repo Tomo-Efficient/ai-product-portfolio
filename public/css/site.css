@@ -441,3 +441,13 @@ main{animation:rise .45s var(--ease) both}
   .next-project a{flex-direction:column;align-items:flex-start}
   .footer-bottom{flex-direction:column;gap:4px}
 }
+
+.hero-copy > .eyebrow { margin-bottom: 14px; }
+.availability { max-width: 100%; line-height: 1.55; }
+.availability .pulse { margin-top: 5px; }
+.side-row strong { max-width: 68%; line-height: 1.55; }
+.about-facts .fact strong { max-width: 70%; line-height: 1.6; word-break: break-word; }
+@media (max-width: 640px) {
+  .availability { align-items: flex-start; font-size: 10.5px; }
+  .about-facts .fact strong { max-width: 64%; }
+}

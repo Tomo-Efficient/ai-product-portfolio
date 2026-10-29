@@ -2,8 +2,8 @@
   "name": "石浩田",
   "nameEn": "Shi Haotian",
   "role": "AI 产品经理",
-  "focus": "数据产品 / 大模型应用",
-  "location": "香港 · 深圳",
+  "focus": "AI 产品 / 数据产品",
+  "location": "北京·上海·广州·深圳·杭州·香港",
   "status": "2027 届 · 求职中",
   "email": "s18538218915@163.com",
   "phone": "18538218915",
@@ -15,10 +15,22 @@
     "desc": "统计学出身，做过智能问数 Agent、AI 面试教练与数据产品。习惯从真实场景出发，把模糊的需求拆成流程、指标和可验证的迭代。"
   },
   "stats": [
-    { "value": "85%+", "label": "NL2SQL 答案正确率" },
-    { "value": "6h → 30s", "label": "单次分析周期" },
-    { "value": "158", "label": "产品测试用例" },
-    { "value": "3", "label": "段产品实习" }
+    {
+      "value": "85%+",
+      "label": "NL2SQL 答案正确率"
+    },
+    {
+      "value": "6h → 30s",
+      "label": "单次分析周期"
+    },
+    {
+      "value": "158",
+      "label": "产品测试用例"
+    },
+    {
+      "value": "3",
+      "label": "段产品实习"
+    }
   ],
   "principles": [
     {
@@ -58,12 +70,28 @@
     }
   ],
   "education": [
-    { "school": "香港城市大学", "degree": "统计学（生物方向）硕士", "period": "2025.09 — 2026.10" },
-    { "school": "河南工业大学", "degree": "数据科学与大数据技术 学士", "period": "2021.09 — 2025.06" }
+    {
+      "school": "香港城市大学",
+      "degree": "统计学（生物方向）硕士",
+      "period": "2025.09 — 2026.10"
+    },
+    {
+      "school": "河南工业大学",
+      "degree": "数据科学与大数据技术 学士",
+      "period": "2021.09 — 2025.06"
+    }
   ],
   "skills": [
-    "SQL", "Python", "R", "Agent / ReAct", "RAG", "Prompt 工程", "指标与 AB 实验",
-    "PRD / 原型", "Figma / Axure", "Claude Code / Cursor"
+    "SQL",
+    "Python",
+    "R",
+    "Agent / ReAct",
+    "RAG",
+    "Prompt 工程",
+    "指标与 AB 实验",
+    "PRD / 原型",
+    "Figma / Axure",
+    "Claude Code / Cursor"
   ],
   "availability": "寻找 AI 产品经理 / 数据产品经理机会，欢迎聊项目或交换想法。"
 }

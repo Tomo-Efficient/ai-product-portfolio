@@ -1,6 +1,6 @@
 {
   "slug": "smart-query",
-  "order": 2,
+  "order": 1,
   "name": "智能问数 Agent",
   "shortName": "智能问数",
   "kind": "NL2SQL 数据产品",
@@ -14,21 +14,73 @@
   "problem": "业务取数依赖数据开发排期，单次分析平均 6 小时；近千个字段、口径分散、表关系复杂，通用模型直接生成 SQL 的错误率不可接受。",
   "outcome": "用四层数据准备、混合检索、复杂度路由与 Query Checking，把 SQL 答案正确率稳定在 85% 以上，分析周期缩短到 30 秒。",
   "metrics": [
-    { "value": "85%+", "unit": "", "label": "SQL 答案正确率" },
-    { "value": "6h → 30s", "unit": "", "label": "单次分析周期" },
-    { "value": "90%", "unit": "", "label": "分析耗时下降" },
-    { "value": "10+", "unit": "个", "label": "灰度 ETL 脚本" }
+    {
+      "value": "85%+",
+      "unit": "",
+      "label": "SQL 答案正确率"
+    },
+    {
+      "value": "6h → 30s",
+      "unit": "",
+      "label": "单次分析周期"
+    },
+    {
+      "value": "90%",
+      "unit": "",
+      "label": "分析耗时下降"
+    },
+    {
+      "value": "10+",
+      "unit": "个",
+      "label": "灰度 ETL 脚本"
+    }
   ],
-  "tags": ["NL2SQL", "Data Agent", "RAG", "Schema Linking", "安全护栏"],
+  "tags": [
+    "NL2SQL",
+    "Data Agent",
+    "RAG",
+    "Schema Linking",
+    "安全护栏"
+  ],
   "cover": "/assets/work/smart-query-cover.jpg",
   "coverAlt": "智能问数 Agent 查询控制台示意",
   "gallery": [],
   "repoUrl": "",
   "docs": [
-    { "slug": "readme", "label": "01", "title": "README", "file": "readme.md", "summary": "项目定位、功能、系统一览与演示入口" },
-    { "slug": "prd", "label": "02", "title": "产品需求文档 PRD", "file": "prd.md", "summary": "用户、竞品、指标口径、模块与验收标准" },
-    { "slug": "architecture", "label": "03", "title": "架构说明", "file": "architecture.md", "summary": "问数时序、复杂度路由、混合检索、SQL 校验与安全" },
-    { "slug": "prompts", "label": "04", "title": "Prompt 设计", "file": "prompts.md", "summary": "六类 Prompt、上下文预算、few-shot 与降级链" },
-    { "slug": "demo", "label": "05", "title": "演示脚本", "file": "demo.md", "summary": "3 分钟与 10 分钟演示，以及高频追问" }
+    {
+      "slug": "readme",
+      "label": "01",
+      "title": "README",
+      "file": "readme.md",
+      "summary": "项目定位、功能、系统一览与演示入口"
+    },
+    {
+      "slug": "prd",
+      "label": "02",
+      "title": "产品需求文档 PRD",
+      "file": "prd.md",
+      "summary": "用户、竞品、指标口径、模块与验收标准"
+    },
+    {
+      "slug": "architecture",
+      "label": "03",
+      "title": "架构说明",
+      "file": "architecture.md",
+      "summary": "问数时序、复杂度路由、混合检索、SQL 校验与安全"
+    },
+    {
+      "slug": "prompts",
+      "label": "04",
+      "title": "Prompt 设计",
+      "file": "prompts.md",
+      "summary": "六类 Prompt、上下文预算、few-shot 与降级链"
+    },
+    {
+      "slug": "demo",
+      "label": "05",
+      "title": "演示脚本",
+      "file": "demo.md",
+      "summary": "3 分钟与 10 分钟演示，以及高频追问"
+    }
   ]
 }

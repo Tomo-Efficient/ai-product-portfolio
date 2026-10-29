@@ -63,7 +63,7 @@ function footer(profile) {
     <div class="footer-inner">
       <div>
         <div class="footer-name">石浩田 <span>/ Shi Haotian</span></div>
-        <p>AI 产品经理 · 数据产品与大模型应用</p>
+        <p>AI 产品经理 · ${esc(profile.focus)}</p>
       </div>
       <div class="footer-links">
         <a href="mailto:${esc(profile.email)}">${esc(profile.email)}</a>
@@ -167,6 +167,7 @@ export function renderHome({ profile, projects, stats = {} }) {
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
+        <div class="eyebrow">AI 产品经理 · 作品集 2026</div>
         <div class="availability"><span class="pulse"></span>${esc(profile.status)} · ${esc(profile.location)}</div>
         <h1>${esc(profile.hero.line1)}<br><span>${esc(profile.hero.line2)}</span></h1>
         <p class="hero-desc">${esc(profile.hero.desc)}</p>
@@ -187,21 +188,18 @@ export function renderHome({ profile, projects, stats = {} }) {
         <div class="side-index">01 — 02</div>
       </aside>
     </div>
-    <div class="container hero-stats">
-      ${profile.stats.map((s) => `<div><strong>${esc(s.value)}</strong><span>${esc(s.label)}</span></div>`).join('')}
-    </div>
   </section>
 
   <section class="section" id="work">
     <div class="container">
-      ${sectionHead('SELECTED WORK', '两个 AI 产品，<br>两种问题结构。', '一个面向 C 端求职者，一个面向 B 端业务人员；共同点是：先把问题拆清楚，再让模型进入流程。', `<span class="section-count">02 PROJECTS</span>`)}
+      ${sectionHead('作品 / SELECTED WORK', '两个 AI 产品，<br>两类真实业务问题。', '一个面向 B 端业务人员的智能问数，一个面向 C 端求职者的 AI 面试教练。共同点是：先把问题拆清楚，再让模型进入流程。', `<span class="section-count">02 PROJECTS</span>`)}
       <div class="projects">${projects.map(projectCard).join('')}</div>
     </div>
   </section>
 
   <section class="section section-tinted">
     <div class="container">
-      ${sectionHead('HOW I WORK', '我关心的不是“能不能用 AI”，<br>而是“能不能被用起来”。', '')}
+      ${sectionHead('方法 / HOW I WORK', '我怎么做 AI 产品：<br>先找卡点，再进流程。', '三条反复使用的工作原则：从真实卡点出发，把 AI 放进流程，用指标证明结果。', '')}
       <div class="principles">
         ${profile.principles.map((p) => `<div class="principle"><span>${esc(p.no)}</span><h3>${esc(p.title)}</h3><p>${esc(p.desc)}</p></div>`).join('')}
       </div>
@@ -210,7 +208,7 @@ export function renderHome({ profile, projects, stats = {} }) {
 
   <section class="section" id="docs">
     <div class="container">
-      ${sectionHead('DOCUMENTATION', '每个项目，<br>都有完整的思考过程。', '不是截图堆砌。从 README、PRD 到架构、Prompt 和演示脚本，每个项目都有自己的一套文档。', `<a class="text-link" href="${u('/docs')}">文档总览 ${icon('arrow')}</a>`)}
+      ${sectionHead('文档 / DOCUMENTATION', '每个项目，<br>五份可以点开的文档。', '不是截图堆砌。README 讲清做什么，PRD 讲清为谁做，架构讲清怎么做，Prompt 讲清模型怎么参与，演示脚本讲清怎么讲。', `<a class="text-link" href="${u('/docs')}">文档总览 ${icon('arrow')}</a>`)}
       <div class="docs-groups">${projects.map(docsGroup).join('')}</div>
     </div>
   </section>
@@ -218,7 +216,7 @@ export function renderHome({ profile, projects, stats = {} }) {
   <section class="section about-section" id="about">
     <div class="container about-grid">
       <div>
-        ${sectionHead('ABOUT', '统计学出身，<br>做产品，也写代码。', '')}
+        ${sectionHead('关于 / ABOUT', '关于我：<br>做产品，也写代码。', '统计学出身，关于我的经历、工作方式和为什么做这两个项目。')}
         <div class="about-copy">
           <p>我在香港城市大学读统计学，做过三段数据/AI 产品实习：从会员分层、营销归因，到智能问数 Agent 和 AI 面试教练。</p>
           <p>我的舒适区是把一个模糊的业务问题拆成：谁在什么场景下卡住、用什么指标衡量、AI 应该放在哪一步、失败了怎么退。然后把它写成 PRD、画出流程、跑通一个能演示的版本。</p>
@@ -242,8 +240,8 @@ export function renderHome({ profile, projects, stats = {} }) {
   <section class="contact-band">
     <div class="container contact-grid">
       <div>
-        <div class="eyebrow">CONTACT</div>
-        <h2>如果你也在想<br>“AI 该怎么进入业务”，聊聊。</h2>
+        <div class="eyebrow">联系 / CONTACT</div>
+        <h2>有岗位、项目，<br>或者一个值得聊的问题？</h2>
       </div>
       <div class="contact-side">
         <a class="contact-email" href="mailto:${esc(profile.email)}">${esc(profile.email)}</a>
