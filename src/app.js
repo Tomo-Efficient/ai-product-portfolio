@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { PUBLIC_DIR, BASE_PATH, SITE_URL, CONTACT_EMAIL, NODE_ENV } from './config.js';
+import { PUBLIC_DIR, BASE_PATH, SITE_URL, CONTACT_EMAIL, NODE_ENV, u } from './config.js';
 import { getContent, getProject, getDoc, getAllDocs, getProjects, nextProject } from './content.js';
 import { renderMarkdown } from './markdown.js';
 import { dbStatus, getStats, recordView, saveContact, saveFeedback, feedbackSummary } from './db.js';
@@ -120,6 +120,13 @@ export async function handleRequest(req, res) {
   try { pathname = decodeURIComponent(url.pathname); } catch { return json(res, 400, { error: '非法路径' }); }
   pathname = stripBase(pathname);
   const method = req.method || 'GET';
+
+  // Canonicalize trailing slashes: /docs/ -> /docs, but keep the root.
+  if ((method === 'GET' || method === 'HEAD') && pathname.length > 1 && pathname.endsWith('/')) {
+    const clean = pathname.replace(/\/+$/, '') || '/';
+    res.writeHead(301, { Location: `${u(clean)}${url.search}`, ...SECURITY_HEADERS });
+    return res.end();
+  }
 
   if (method === 'GET' || method === 'HEAD') {
     if (pathname === '/healthz') return json(res, 200, { ok: true, db: dbStatus().mode, time: new Date().toISOString() });
