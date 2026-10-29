@@ -282,7 +282,7 @@ export function renderWork({ project, profile, caseHtml, stats = {}, next }) {
         <div><span>角色</span><strong>${esc(project.role)}</strong></div>
         <div><span>时间</span><strong>${esc(project.period)}</strong></div>
         <div><span>类型</span><strong>${esc(project.kind)}</strong></div>
-        <div><span>浏览</span><strong>${stats.counts?.[project.slug] || 0}</strong></div>
+        <div><span>浏览</span><strong>${STATIC_EXPORT ? '—' : (stats.counts?.[project.slug] || 0)}</strong></div>
       </div>
       ${metricRow(project.metrics)}
     </div>
