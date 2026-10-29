@@ -110,7 +110,7 @@ LLM_MODEL=deepseek-chat
 
 ## 技术栈与架构
 
-- **后端**：Node.js 原生 HTTP，无 Web 框架、无数据库；JSON 文件持久化（原子写入）
+- **后端**：Node.js 原生 HTTP，无 Web 框架；默认 JSON 文件，配置 `DATABASE_URL` 后使用 Neon Postgres 持久化
 - **前端**：原生 ES Modules + 自写 CSS 设计系统，**零构建**，刷新即生效
 - **文档解析**：自研 DOCX 解析（ZIP central directory + `zlib.inflateRawSync` + OOXML）；PDF 使用 `pdfjs-dist`
 - **检索**：BM25 + 中文 bigram 分词 + 英文词边界，内置 80 题 / 16 篇知识 / 6 个岗位包
@@ -128,13 +128,25 @@ Node HTTP API ── 状态机（parse → match → plan → ask → evaluate �
    │                 ├── 本地规则引擎（零 Key 可用）
    │                 └── LLM（可选，流式）
    ▼
-data/store.json（简历 / 会话 / 题库 / 设置）
+data/store.json 或 Neon mockmirror_state（简历 / 会话 / 题库 / 设置）
 ```
+
+### 持久化
+
+默认使用 `data/store.json`，适合本地单机。配置 `DATABASE_URL` 后自动切换到 Neon：
+
+```bash
+DATABASE_URL=postgresql://... npm start
+```
+
+- 启动时自动创建 `mockmirror_state` 表（单行 JSONB，保存简历 / 会话 / 题库 / 自定义知识库 / 设置）。
+- 重启后数据保留；没有 `DATABASE_URL` 时自动回退到本地文件。
+- `/api/health` 会返回 `storage: "neon"` 或 `storage: "file"`。
 
 更细的设计见：
 
-- [产品需求文档（Word）](docs/面镜MockMirror-产品需求文档-v1.1.docx) · [Markdown 源稿](docs/PRD.md)
-- [测试用例与执行报告（Excel）](docs/面镜MockMirror-测试用例与执行报告-v1.0.xlsx) · [测试报告](docs/TEST-REPORT.md)
+- [产品需求文档（Word）](https://github.com/Tomo-Efficient/mockmirror/blob/main/docs/面镜MockMirror-产品需求文档-v1.1.docx) · [Markdown 源稿](docs/PRD.md)
+- [测试用例与执行报告（Excel）](https://github.com/Tomo-Efficient/mockmirror/blob/main/docs/面镜MockMirror-测试用例与执行报告-v1.0.xlsx) · [测试报告](https://github.com/Tomo-Efficient/mockmirror/blob/main/docs/TEST-REPORT.md)
 - [架构说明](docs/ARCHITECTURE.md)
 - [Prompt 设计](docs/PROMPTS.md)
 - [演示脚本](docs/DEMO.md)
@@ -146,7 +158,7 @@ data/store.json（简历 / 会话 / 题库 / 设置）
 - **158 条用例**：功能验收 51 + 接口 55 + UI 30 + 后台/安全 8 + LLM/边界 14，全部通过。
 - 发现 **6 个缺陷**（1 高 / 2 中 / 3 低），已全部修复并回归；无未关闭 P0/P1。
 - 覆盖真实 DOCX/PDF 解析、SSE 流式、提示/跳过/报告、题库/知识库 CRUD、移动端、XSS、超大请求与模型降级。
-- 明细见 [测试报告](docs/TEST-REPORT.md) 与 [测试用例 Excel](docs/面镜MockMirror-测试用例与执行报告-v1.0.xlsx)。
+- 明细见 [测试报告](https://github.com/Tomo-Efficient/mockmirror/blob/main/docs/TEST-REPORT.md) 与 [测试用例 Excel](https://github.com/Tomo-Efficient/mockmirror/blob/main/docs/面镜MockMirror-测试用例与执行报告-v1.0.xlsx)。
 
 ---
 
@@ -156,7 +168,7 @@ data/store.json（简历 / 会话 / 题库 / 设置）
 ai-interview-coach/
 ├── server/
 │   ├── index.js              # HTTP 服务与 API 路由
-│   ├── store.js              # 内容加载与 JSON 持久化
+│   ├── store.js              # 内容加载、Neon / JSON 持久化
 │   ├── parsers/              # DOCX / PDF / 文本解析
 │   ├── profile.js            # 简历 → 结构化画像
 │   ├── jd.js                 # JD → 岗位匹配
@@ -172,7 +184,8 @@ ai-interview-coach/
 │   ├── css/app.css
 │   └── js/                   # 路由、组件、页面、图表
 ├── content/                  # 题库、知识库、人格、岗位包
-├── data/                     # 运行时数据（demo.json 除外，已 gitignore）
+├── db/                       # Neon 持久化 schema
+├── data/                     # 本地运行时数据（demo.json 除外，已 gitignore）
 └── docs/                     # PRD、架构、Prompt、演示脚本
 ```
 
