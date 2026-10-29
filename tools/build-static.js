@@ -63,9 +63,13 @@ try {
     fs.writeFileSync(path.join(dir, 'index.html'), html);
     console.log('built', route);
   }
-  // 404
+  // 404 / sitemap / robots
   const notFound = await fetch(`http://127.0.0.1:${PORT}${BASE}/__404__`);
   fs.writeFileSync(path.join(OUT, '404.html'), await notFound.text());
+  for (const file of ['sitemap.xml', 'robots.txt']) {
+    const res = await fetch(`http://127.0.0.1:${PORT}${BASE}/${file}`);
+    if (res.ok) fs.writeFileSync(path.join(OUT, file), await res.text());
+  }
   console.log(`static build ready: ${OUT} (base ${BASE})`);
 } finally {
   child.kill('SIGTERM');
