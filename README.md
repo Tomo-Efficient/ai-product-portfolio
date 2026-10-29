@@ -115,8 +115,8 @@ portfolio_doc_feedback   -- 文档反馈
 1. 把仓库推到 GitHub。
 2. 在 Render 新建 Blueprint，选择本仓库（会自动读取 `render.yaml`）。
 3. 填写环境变量：
-   - `DATABASE_URL`：Neon pooled connection string
-   - `SITE_URL`：Render 分配的域名
+   - `DATABASE_URL`：Neon pooled connection string（必填）
+   - `SITE_URL`（可选）：自定义域名；不填时自动使用 `RENDER_EXTERNAL_URL`
    - `COACH_DEMO_URL`（可选）：AI 面试教练 Demo 的独立地址
 4. 部署完成后访问 `/healthz`，确认 `db` 为 `neon`。
 

@@ -38,9 +38,9 @@ curl https://<your-domain>/healthz
 
 | 变量 | 值 |
 | --- | --- |
-| `SITE_URL` | `https://<service>.onrender.com` 或自定义域名 |
-| `DATABASE_URL` | Neon pooled connection string |
-| `COACH_DEMO_URL` | 可选，AI 面试教练 Demo 地址 |
+| `DATABASE_URL` | Neon pooled connection string（必填） |
+| `SITE_URL` | 可选；自定义域名时才填，否则自动用 `RENDER_EXTERNAL_URL` |
+| `COACH_DEMO_URL` | 可选；AI 面试教练 Demo 地址 |
 
 部署完成后访问：
 
@@ -69,7 +69,7 @@ docker run -p 3000:3000 \
 
 1. Vercel → Add New → Project → 导入 GitHub 仓库。
 2. Framework Preset 选 **Other**，Build Command 留空，Output Directory 留空。
-3. 环境变量填 `DATABASE_URL`、`SITE_URL`。
+3. 环境变量只填 `DATABASE_URL`；`SITE_URL` 可选。
 4. Deploy。
 
 > 注意：Vercel 的 serverless 适配已经写好，但本机没有 Vercel 凭据，未做真实线上验证；Render 为已验证路径。
